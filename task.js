@@ -1,3 +1,4 @@
+
 const readline = require("readline");
 require("colors");
 
@@ -35,6 +36,7 @@ function displayMenu() {
         displayMenu();
     }
   });
+}
 
   function addTask() {
     rl.question("Indicador: ", (indicator) => {
@@ -62,7 +64,7 @@ function displayMenu() {
       console.log(
         `${index + 1}. [${task.completed ? "X".yellow : " "}] ${
           task.indicator
-        } - ${task.description}`
+        }  ${task.description}`
       );
     });
 
@@ -91,9 +93,8 @@ function displayMenu() {
     console.log("Lista de tareas:");
     tasks.forEach((task, index) => {
       console.log(
-        `${index + 1}. [${task.completed ? "X" : " "}] ${task.indicator} - ${
-          task.description
-        }`
+        `${index + 1} [${task.completed ? "X" : " "}] ${task.indicator}  ${
+          task.description}`
       );
     });
 
@@ -113,7 +114,7 @@ function displayMenu() {
   }
 
   
-}
+
 
 console.log("¡Bienvenido a la lista de tareas!");
 displayMenu();
