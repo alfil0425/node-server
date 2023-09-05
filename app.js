@@ -1,10 +1,30 @@
 require ("colors");
 const { displayMenu } = require("./task");
+const readline = require ("readline");
 
 
 console.clear();
 
-const main = async() => {
 
-  displayMenu()
+/*async function main() {
+  console.log("¡Bienvenido a la lista de tareas!");
+  await displayMenu();
 }
+*/
+
+function main() {
+  console.log("¡Bienvenido a la lista de tareas!".yellow);
+  displayMenu().then(() => {
+    
+  });
+}
+
+
+
+
+/*const main = async() => {
+
+  displayMenu() 
+}*/
+
+main();

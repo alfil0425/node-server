@@ -1,6 +1,7 @@
 
 const readline = require("readline");
-require("colors");
+const colors = require("colors");
+const { resolve } = require("path");
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -10,17 +11,18 @@ const rl = readline.createInterface({
 
 const tasks = [];
 
-function displayMenu() {
+async function displayMenu() {
+  
   console.log("\nMenu:");
   console.log("1. Agregar tarea");
   console.log("2. Eliminar tarea");
   console.log("3. Completar tarea");
   console.log("4. Salir");
 
-  rl.question("Seleccione una opción: ", (option) => {
+  const option = await askQuestion ("Seleccione una opción: ");
     switch (option) {
       case "1":
-        addTask();
+        await addTask();
         break;
       case "2":
         deleteTask();
@@ -35,10 +37,19 @@ function displayMenu() {
         console.log("Opción inválida.".red);
         displayMenu();
     }
-  });
-}
+  }
+
+  async function askQuestion(question) {
+    return new Promise ((resolve)=> {
+      rl.question(question, (answer) => {
+        resolve(answer);
+      });
+    });
+  }
+
 
   function addTask() {
+    return new Promise((resolve, reject) => {
     rl.question("Indicador: ", (indicator) => {
       rl.question("Descripción: ", (description) => {
         tasks.push({
@@ -47,9 +58,11 @@ function displayMenu() {
           completed: false,
         });
         console.log("Tarea agregada.".green);
-        displayMenu();
+        resolve();
       });
+    });  
     });
+    
   }
 
   function deleteTask() {
@@ -74,7 +87,7 @@ function displayMenu() {
         const taskIndex = parseInt(answer) - 1;
         if (taskIndex >= 0 && taskIndex < tasks.length) {
           tasks.splice(taskIndex, 1);
-          console.log("Tarea eliminada.");
+          console.log("Tarea eliminada.".green);
         } else {
           console.log("Número de tarea inválido.".red);
         }
@@ -93,7 +106,7 @@ function displayMenu() {
     console.log("Lista de tareas:");
     tasks.forEach((task, index) => {
       console.log(
-        `${index + 1} [${task.completed ? "X" : " "}] ${task.indicator}  ${
+        `${index + 1}[${task.completed ? "X" : " "}] ${task.indicator}  ${
           task.description}`
       );
     });
@@ -112,13 +125,8 @@ function displayMenu() {
       }
     );
   }
+  module.exports = {
+    displayMenu,
+  };
 
   
-
-
-console.log("¡Bienvenido a la lista de tareas!");
-displayMenu();
-
-module.exports = {
-    displayMenu,
-};
