@@ -59,6 +59,7 @@ async function displayMenu() {
         });
         console.log("Tarea agregada.".green);
         resolve();
+        displayMenu()
       });
     });  
     });

@@ -6,18 +6,18 @@ const readline = require ("readline");
 console.clear();
 
 
-/*async function main() {
+async function main() {
   console.log("¡Bienvenido a la lista de tareas!");
   await displayMenu();
 }
-*/
 
-function main() {
+
+/*function main() {
   console.log("¡Bienvenido a la lista de tareas!".yellow);
   displayMenu().then(() => {
     
   });
-}
+}*/
 
 
 
